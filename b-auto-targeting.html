@@ -38,18 +38,17 @@
 
     function chooseTarget(enemies) {
       let target = null;
-      //Pick the living enemy with the highest health value, picks earliest enemy in case of a tie
+      //Pick the living enemy with the highest health value, picks the latest enemy in case of a tie
       for (const enemy of enemies) {
         // If health is zero, that enemy is not alive.
         if (enemy.health <= 0)
         {
           continue;
         }
-        // Keep the earliest enemy if two have equal health.
-          if (target && target.health > enemy.health) {
-          continue;
+        //Replace the target if no target exists or if the enemy has equal or higher health.
+          if (!target || enemy.health >= target.health) {
+            target = enemy;
           }
-          target = enemy;
       }
       return target;
     }
